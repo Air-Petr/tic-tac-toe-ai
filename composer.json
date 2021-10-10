@@ -1,0 +1,6 @@
+{
+    "name": "air-petr/tic-tac-toe-ai",
+    "autoload": {
+      "psr-4": {"AirPetr\\": "src/"}
+    }
+}
