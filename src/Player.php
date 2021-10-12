@@ -64,6 +64,6 @@ class Player
      */
     public function placeMark(string $mark, Board $board): Board
     {
-        return new Board;
+        return new Board();
     }
 }
