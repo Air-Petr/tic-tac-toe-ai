@@ -19,11 +19,13 @@ final class PlayerTest extends TestCase
         $this->assertInstanceOf(Player::class, Player::hard());
     }
 
-    public function testMove(): void
+    public function testMoveChangeBoard(): void
     {
-        $board = new Board();
+        $board = Board::createByString('__X__O__X');
         $player = new Player();
+        $nextBoard = $player->placeMark('O', $board);
 
-        $this->assertInstanceOf(Board::class, $player->placeMark('foo', $board));
+        $this->assertInstanceOf(Board::class, $nextBoard);
+        $this->assertNotSameSize(array_keys($board->toPlainArray(), '_'), array_keys($nextBoard->toPlainArray(), '_'));
     }
 }

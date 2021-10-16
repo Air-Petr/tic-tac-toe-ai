@@ -3,6 +3,8 @@
 namespace AirPetr\TicTacToeAi;
 
 use AirPetr\TicTacToeAi\Enum\PlayerDifficulty;
+use AirPetr\TicTacToeAi\PlayAlgorithms\PlayAlgorithmInterface;
+use AirPetr\TicTacToeAi\PlayAlgorithms\Random;
 
 /**
  * AI Tic-tac-toe player.
@@ -14,7 +16,7 @@ class Player
      *
      * @var int
      */
-    private $difficulty;
+    protected $difficulty;
 
     /**
      * @param int $difficulty
@@ -64,6 +66,16 @@ class Player
      */
     public function placeMark(string $mark, Board $board): Board
     {
-        return new Board();
+        return $this->getAlgorithm()->getBoardWithNewMark($mark, $board);
+    }
+
+    /**
+     * Return play algorithm.
+     *
+     * @return PlayAlgorithmInterface
+     */
+    protected function getAlgorithm(): PlayAlgorithmInterface
+    {
+        return new Random();
     }
 }
