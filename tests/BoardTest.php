@@ -34,11 +34,24 @@ final class BoardTest extends TestCase
     }
 
     /**
+     * Test copy method.
+     */
+    public function  testCopy(): void
+    {
+        $board = Board::createByArrayTable($this->getDummyArrayTable());
+        $copy = $board->copy();
+
+        $this->assertInstanceOf(Board::class, $copy);
+        $this->assertNotSame($board, $copy);
+        $this->assertSame($board->toString(), $copy->toString());
+    }
+
+    /**
      * Dummy array table.
      *
      * @return string[][]
      */
-    public function getDummyArrayTable(): array
+    protected function getDummyArrayTable(): array
     {
         return [
             ['X', '_', '_'],
@@ -52,7 +65,7 @@ final class BoardTest extends TestCase
      *
      * @return string[]
      */
-    public function getDummyPlainArray(): array
+    protected function getDummyPlainArray(): array
     {
         return ['X', '_', '_', '_', 'O', '_', '_', '_', 'X'];
     }
@@ -62,7 +75,7 @@ final class BoardTest extends TestCase
      *
      * @return string
      */
-    public function getDummyStringConfig(): string
+    protected function getDummyStringConfig(): string
     {
         return 'X___O___X';
     }

@@ -105,4 +105,14 @@ class Board
     {
         return implode($this->toPlainArray());
     }
+
+    /**
+     * Return copy of the board.
+     *
+     * @return $this
+     */
+    public function copy(): self
+    {
+        return self::createByArrayTable($this->toArrayTable());
+    }
 }
