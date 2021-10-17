@@ -3,6 +3,7 @@
 namespace AirPetr\TicTacToeAi;
 
 use AirPetr\TicTacToeAi\Enum\PlayerDifficulty;
+use AirPetr\TicTacToeAi\PlayAlgorithms\Minimax;
 use AirPetr\TicTacToeAi\PlayAlgorithms\PlayAlgorithmInterface;
 use AirPetr\TicTacToeAi\PlayAlgorithms\Random;
 
@@ -76,6 +77,10 @@ class Player
      */
     protected function getAlgorithm(): PlayAlgorithmInterface
     {
+        if ($this->difficulty === PlayerDifficulty::HARD) {
+            return new Minimax();
+        }
+
         return new Random();
     }
 }

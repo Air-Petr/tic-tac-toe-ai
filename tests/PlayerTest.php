@@ -31,4 +31,14 @@ final class PlayerTest extends TestCase
         $this->assertInstanceOf(Board::class, $nextBoard);
         $this->assertNotSameSize(array_keys($board->toPlainArray(), '_'), array_keys($nextBoard->toPlainArray(), '_'));
     }
+
+    public function testHardPlayer(): void
+    {
+        $board = Board::createByString('__X__O__X');
+        $player = Player::hard();
+        $nextBoard = $player->placeMark('O', $board);
+
+        $this->assertInstanceOf(Board::class, $nextBoard);
+        $this->assertNotSameSize(array_keys($board->toPlainArray(), '_'), array_keys($nextBoard->toPlainArray(), '_'));
+    }
 }
