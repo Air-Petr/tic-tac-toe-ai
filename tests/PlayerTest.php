@@ -19,7 +19,10 @@ final class PlayerTest extends TestCase
         $this->assertInstanceOf(Player::class, Player::hard());
     }
 
-    public function testMoveChangeBoard(): void
+    /**
+     * Test that move changes the board.
+     */
+    public function testMoveChangesBoard(): void
     {
         $board = Board::createByString('__X__O__X');
         $player = new Player();
