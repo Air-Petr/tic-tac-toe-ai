@@ -2,10 +2,13 @@
 
 namespace AirPetr\TicTacToeAi;
 
+use Exception;
 use AirPetr\TicTacToeAi\Enum\PlayerDifficulty;
 use AirPetr\TicTacToeAi\PlayAlgorithms\Minimax;
-use AirPetr\TicTacToeAi\PlayAlgorithms\PlayAlgorithmInterface;
 use AirPetr\TicTacToeAi\PlayAlgorithms\Random;
+use AirPetr\TicTacToeAi\PlayAlgorithms\PlayAlgorithmInterface;
+
+use function PHPUnit\Framework\throwException;
 
 /**
  * AI Tic-tac-toe player.
@@ -64,9 +67,14 @@ class Player
      * @param Board $board
      *
      * @return Board
+     * @throws Exception
      */
     public function placeMark(string $mark, Board $board): Board
     {
+        if (!$board->hasEmptyCell()) {
+            throw new Exception("Board have no empty cells");
+        }
+
         return $this->getAlgorithm()->getBoardWithNewMark($mark, $board);
     }
 

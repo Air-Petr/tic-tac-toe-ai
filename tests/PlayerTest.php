@@ -41,4 +41,19 @@ final class PlayerTest extends TestCase
 
         $this->assertNotSame($nextBoard->toString(), $board->toString());
     }
+
+    /**
+     * Test Exception throwing for full board.
+     *
+     * @throws Exception
+     */
+    public function testFullBoardException(): void
+    {
+        $player = new Player();
+        $board = Board::createByString('XOXOXOXOX');
+
+        $this->expectException(Exception::class);
+
+        $player->placeMark('O', $board);
+    }
 }

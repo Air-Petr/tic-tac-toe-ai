@@ -77,6 +77,16 @@ class Board
     }
 
     /**
+     * Check whether board has empty cells.
+     *
+     * @return bool
+     */
+    public function hasEmptyCell(): bool
+    {
+        return (array_search('_', $this->toPlainArray()) !== false);
+    }
+
+    /**
      * Return array table representation of a board.
      *
      * @return array
