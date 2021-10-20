@@ -20,25 +20,25 @@ final class PlayerTest extends TestCase
     }
 
     /**
+     * Test that a move returns board.
+     */
+    public function testPlacingMarkReturnsBoard(): void
+    {
+        $board = new Board();
+        $player = new Player();
+
+        $this->assertInstanceOf(Board::class, $player->placeMark('O', $board));
+    }
+
+    /**
      * Test that move changes the board.
      */
     public function testMoveChangesBoard(): void
     {
-        $board = Board::createByString('__X__O__X');
+        $board = new Board();
         $player = new Player();
         $nextBoard = $player->placeMark('O', $board);
 
-        $this->assertInstanceOf(Board::class, $nextBoard);
-        $this->assertNotSameSize(array_keys($board->toPlainArray(), '_'), array_keys($nextBoard->toPlainArray(), '_'));
-    }
-
-    public function testHardPlayer(): void
-    {
-        $board = Board::createByString('__X__O__X');
-        $player = Player::hard();
-        $nextBoard = $player->placeMark('O', $board);
-
-        $this->assertInstanceOf(Board::class, $nextBoard);
-        $this->assertNotSameSize(array_keys($board->toPlainArray(), '_'), array_keys($nextBoard->toPlainArray(), '_'));
+        $this->assertNotSame($nextBoard->toString(), $board->toString());
     }
 }
