@@ -3,6 +3,7 @@
 namespace AirPetr\TicTacToeAi;
 
 use AirPetr\TicTacToeAi\Classes\BoardFactory;
+use AirPetr\TicTacToeAi\Classes\ConfigValidator;
 
 /**
  * Game board.
@@ -37,6 +38,8 @@ class Board
      */
     public static function createByArrayTable(array $config): self
     {
+        ConfigValidator::validateArrayTable($config);
+
         return BoardFactory::createByArrayTable($config);
     }
 

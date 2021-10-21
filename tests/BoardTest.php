@@ -36,7 +36,7 @@ final class BoardTest extends TestCase
     /**
      * Test copy method.
      */
-    public function  testCopy(): void
+    public function testCopy(): void
     {
         $board = Board::createByArrayTable($this->getDummyArrayTable());
         $copy = $board->copy();
