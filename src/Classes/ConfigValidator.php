@@ -9,9 +9,6 @@ use Exception;
  */
 class ConfigValidator
 {
-    protected const WRONG_BOARD_SIZE_MESSAGE = 'Wrong board size';
-    protected const WRONG_BOARD_SYMBOL_MESSAGE = 'Wrong board symbol';
-
     /**
      * Validate array table config.
      *
@@ -21,15 +18,12 @@ class ConfigValidator
      */
     public static function validateArrayTable(array $config): void
     {
-        if (count(array_merge(...$config)) !== 9) {
-            throw new Exception(self::WRONG_BOARD_SIZE_MESSAGE);
-        }
+        $validator = new self();
+        $validator->validateSize(count(array_merge(...$config)));
 
         foreach ($config as $row) {
             foreach ($row as $symbol) {
-                if (!in_array($symbol, ['_', 'X', 'O'])) {
-                    throw new Exception(self::WRONG_BOARD_SYMBOL_MESSAGE);
-                }
+                $validator->validateSymbol($symbol);
             }
         }
     }
@@ -43,14 +37,11 @@ class ConfigValidator
      */
     public static function validatePlainArray(array $config): void
     {
-        if (count($config) !== 9) {
-            throw new Exception(self::WRONG_BOARD_SIZE_MESSAGE);
-        }
+        $validator = new self();
+        $validator->validateSize(count($config));
 
         foreach ($config as $symbol) {
-            if (!in_array($symbol, ['_', 'X', 'O'])) {
-                throw new Exception(self::WRONG_BOARD_SYMBOL_MESSAGE);
-            }
+            $validator->validateSymbol($symbol);
         }
     }
 
@@ -63,14 +54,39 @@ class ConfigValidator
      */
     public static function validateString(string $config): void
     {
-        if (strlen($config) !== 9) {
-            throw new Exception(self::WRONG_BOARD_SIZE_MESSAGE);
-        }
+        $validator = new self();
+        $validator->validateSize(strlen($config));
 
         foreach (str_split($config) as $symbol) {
-            if (!in_array($symbol, ['_', 'X', 'O'])) {
-                throw new Exception(self::WRONG_BOARD_SYMBOL_MESSAGE);
-            }
+            $validator->validateSymbol($symbol);
+        }
+    }
+
+    /**
+     * Validate size.
+     *
+     * @param int $len
+     *
+     * @throws Exception
+     */
+    protected function validateSize(int $len): void
+    {
+        if ($len !== 9) {
+            throw new Exception('Wrong board size');
+        }
+    }
+
+    /**
+     * Validate symbol.
+     *
+     * @param $symbol
+     *
+     * @throws Exception
+     */
+    protected function validateSymbol($symbol): void
+    {
+        if (!in_array($symbol, ['_', 'X', 'O'])) {
+            throw new Exception('Wrong board symbol');
         }
     }
 }
