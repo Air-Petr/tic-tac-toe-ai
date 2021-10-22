@@ -4,6 +4,9 @@ namespace AirPetr\TicTacToeAi\Classes;
 
 use Exception;
 
+/**
+ * Board config validator.
+ */
 class ConfigValidator
 {
     protected const WRONG_BOARD_SIZE_MESSAGE = 'Wrong board size';
@@ -45,6 +48,26 @@ class ConfigValidator
         }
 
         foreach ($config as $symbol) {
+            if (!in_array($symbol, ['_', 'X', 'O'])) {
+                throw new Exception(self::WRONG_BOARD_SYMBOL_MESSAGE);
+            }
+        }
+    }
+
+    /**
+     * Validate string config.
+     *
+     * @param string $config
+     *
+     * @throws Exception
+     */
+    public static function validateString(string $config): void
+    {
+        if (strlen($config) !== 9) {
+            throw new Exception(self::WRONG_BOARD_SIZE_MESSAGE);
+        }
+
+        foreach (str_split($config) as $symbol) {
             if (!in_array($symbol, ['_', 'X', 'O'])) {
                 throw new Exception(self::WRONG_BOARD_SYMBOL_MESSAGE);
             }

@@ -6,7 +6,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * Tests for plain array config validator.
  */
-final class PlainArrayValidatorTest extends TestCase
+final class PlainArrayConfigValidatorTest extends TestCase
 {
     /**
      * Test normal plain array size.
@@ -20,7 +20,7 @@ final class PlainArrayValidatorTest extends TestCase
     }
 
     /**
-     * Test normal array table size.
+     * Test wrong plain array size.
      */
     public function testPlainArrayWrongSize(): void
     {

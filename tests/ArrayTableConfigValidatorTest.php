@@ -6,7 +6,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * Tests for array table config validator.
  */
-final class ArrayTableValidatorTest extends TestCase
+final class ArrayTableConfigValidatorTest extends TestCase
 {
     /**
      * Test normal array table size.

@@ -64,6 +64,7 @@ class Board
      */
     public static function createByString(string $config): self
     {
+        ConfigValidator::validateString($config);
         return BoardFactory::createByString($config);
     }
 
