@@ -39,7 +39,6 @@ class Board
     public static function createByArrayTable(array $config): self
     {
         ConfigValidator::validateArrayTable($config);
-
         return BoardFactory::createByArrayTable($config);
     }
 
@@ -52,6 +51,7 @@ class Board
      */
     public static function createByPlainArray(array $config): self
     {
+        ConfigValidator::validatePlainArray($config);
         return BoardFactory::createByPlainArray($config);
     }
 

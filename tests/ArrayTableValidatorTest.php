@@ -4,9 +4,9 @@ use AirPetr\TicTacToeAi\Board;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Tests for Board validators.
+ * Tests for array table config validator.
  */
-final class BoardValidatorsTest extends TestCase
+final class ArrayTableValidatorTest extends TestCase
 {
     /**
      * Test normal array table size.
@@ -81,5 +81,20 @@ final class BoardValidatorsTest extends TestCase
 
         $this->expectException(Exception::class);
         Board::createByArrayTable($badConfig);
+    }
+
+    /**
+     * Test wrong symbols in config.
+     */
+    public function testArrayTableWrongSymbols(): void
+    {
+        $config = [
+            ['_', '_', '_'],
+            ['_', '_', '_'],
+            ['_', 'f', '_'],
+        ];
+
+        $this->expectException(Exception::class);
+        Board::createByArrayTable($config);
     }
 }
