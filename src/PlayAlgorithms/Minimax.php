@@ -77,9 +77,11 @@ class Minimax implements PlayAlgorithmInterface
         $score = $this->evaluateBoard($board->toArrayTable());
         $boardTable = $board->toArrayTable();
 
-        if (abs($score) === 10) {
-            return $score;
-        } elseif ($this->isMovesLeft($board)) {
+        if ($score === 10) {
+            return $score - $depth;
+        } elseif ($score === -10) {
+            return $score + $depth;
+        } elseif (!$this->isMovesLeft($board)) {
             return 0;
         } elseif ($isMax) {
             $best = -1000;

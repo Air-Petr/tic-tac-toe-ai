@@ -35,6 +35,7 @@ class Board
      * @param array $config
      *
      * @return static
+     * @throws \Exception
      */
     public static function createByArrayTable(array $config): self
     {
@@ -48,6 +49,7 @@ class Board
      * @param array $config
      *
      * @return static
+     * @throws \Exception
      */
     public static function createByPlainArray(array $config): self
     {
@@ -61,6 +63,7 @@ class Board
      * @param string $config
      *
      * @return static
+     * @throws \Exception
      */
     public static function createByString(string $config): self
     {
