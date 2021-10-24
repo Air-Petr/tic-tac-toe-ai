@@ -43,7 +43,7 @@ class Minimax implements PlayAlgorithmInterface
         for($i = 0; $i < 3; $i++) {
             for($j = 0; $j < 3; $j++) {
                 if ($boardTable[$i][$j] === '_') {
-                    $boardTable[$i][$j] = $mark;
+                    $boardTable[$i][$j] = $this->player;
 
                     $moveValue = $this->minimax(Board::createByArrayTable($boardTable), 0, false);
 
