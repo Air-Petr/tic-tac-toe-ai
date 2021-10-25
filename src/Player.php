@@ -75,6 +75,10 @@ class Player
             throw new Exception("Board have no empty cells");
         }
 
+        if (!$board->validateMove($mark)) {
+            throw new Exception("Player can't put '$mark' now");
+        }
+
         return $this->getAlgorithm()->getBoardWithNewMark($mark, $board);
     }
 

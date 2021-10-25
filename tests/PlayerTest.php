@@ -56,4 +56,35 @@ final class PlayerTest extends TestCase
 
         $player->placeMark('O', $board);
     }
+
+    /**
+     * Test wrong symbol given by user.
+     *
+     * @throws Exception
+     */
+    public function testWrongSymbol(): void
+    {
+        $player = new Player();
+        $board = new Board();
+
+        $this->expectException(Exception::class);
+
+        $player->placeMark('f', $board);
+    }
+
+    /**
+     * Test wrong order of move.
+     *
+     * @throws Exception
+     */
+    public function testWrongOrderOfMove(): void
+    {
+        $player = new Player();
+        $board = Board::createByString('XOX______');
+
+        $this->expectException(Exception::class);
+
+        $player->placeMark('X', $board);
+    }
+
 }

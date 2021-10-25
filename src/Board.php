@@ -132,4 +132,32 @@ class Board
     {
         return self::createByArrayTable($this->toArrayTable());
     }
+
+    /**
+     * Show whether a mark can be placed now.
+     *
+     * @param string $mark
+     *
+     * @return bool
+     */
+    public function validateMove(string $mark): bool
+    {
+        $playerMovesCount = 0;
+        $opponentMovesCount = 0;
+
+        foreach ($this->toPlainArray() as $cell) {
+            if ($cell === '_') {
+                continue;
+            }
+
+            if ($cell === $mark) {
+                $playerMovesCount++;
+            } else {
+                $opponentMovesCount++;
+            }
+        }
+
+        $diff = $opponentMovesCount - $playerMovesCount;
+        return in_array($diff, [0, 1]);
+    }
 }
