@@ -46,6 +46,18 @@ final class BoardTest extends TestCase
         $this->assertSame($board->toString(), $copy->toString());
     }
 
+    public function testBoardTurn(): void
+    {
+        $board = Board::createByString('_________');
+        $this->assertEquals(9, $board->countEmptyCells());
+
+        $board = Board::createByString('XOXOXOXOX');
+        $this->assertEquals(0, $board->countEmptyCells());
+
+        $board = Board::createByString('__X__O__X');
+        $this->assertEquals(6, $board->countEmptyCells());
+    }
+
     /**
      * Dummy array table.
      *

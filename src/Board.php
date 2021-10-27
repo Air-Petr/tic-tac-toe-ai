@@ -160,4 +160,16 @@ class Board
         $diff = $opponentMovesCount - $playerMovesCount;
         return in_array($diff, [0, 1]);
     }
+
+    /**
+     * Return number of empty cells.
+     *
+     * @return int
+     */
+    public function countEmptyCells(): int
+    {
+        return count(array_filter($this->toPlainArray(), function ($cell) {
+            return $cell === '_';
+        }));
+    }
 }
