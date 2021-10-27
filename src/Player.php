@@ -31,16 +31,6 @@ class Player
     }
 
     /**
-     * Return easy player.
-     *
-     * @return Player
-     */
-    public static function easy(): Player
-    {
-        return new self(PlayerDifficulty::EASY);
-    }
-
-    /**
      * Return normal player.
      *
      * @return Player

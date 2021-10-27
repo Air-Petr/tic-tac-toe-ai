@@ -14,7 +14,6 @@ final class PlayerTest extends TestCase
      */
     public function testInitialization(): void
     {
-        $this->assertInstanceOf(Player::class, Player::easy());
         $this->assertInstanceOf(Player::class, Player::normal());
         $this->assertInstanceOf(Player::class, Player::hard());
     }
