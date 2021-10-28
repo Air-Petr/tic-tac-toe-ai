@@ -172,4 +172,36 @@ class Board
     {
         return $this->countEmptyCells() > 0;
     }
+
+    /**
+     * Evaluate board.
+     *
+     * @return string
+     */
+    public function evaluate(): string
+    {
+        $b = $this->cells;
+
+        for ($row = 0; $row < 3; $row++) {
+            if ($b[$row][0] === $b[$row][1] && $b[$row][1] === $b[$row][2] && $b[$row][0] !== '_') {
+                return $b[$row][0];
+            }
+        }
+
+        for ($col = 0; $col < 3; $col++) {
+            if ($b[0][$col] === $b[1][$col] && $b[1][$col] === $b[2][$col] && $b[0][$col] !== '_') {
+                return $b[0][$col];
+            }
+        }
+
+        if ($b[0][0] === $b[1][1] && $b[1][1] === $b[2][2] && $b[0][0] !== '_') {
+            return $b[0][0];
+        }
+
+        if ($b[0][2] === $b[1][1] && $b[1][1] === $b[2][0] && $b[0][2] !== '_') {
+            return $b[0][2];
+        }
+
+        return '_';
+    }
 }

@@ -74,7 +74,7 @@ class Minimax implements PlayAlgorithmInterface
      */
     protected function minimax(Board $board, int $depth, bool $isMax): int
     {
-        $score = $this->evaluateBoard($board->toArrayTable());
+        $score = $this->evaluateBoard($board);
         $boardTable = $board->toArrayTable();
 
         if ($score === 10) {
@@ -117,49 +117,20 @@ class Minimax implements PlayAlgorithmInterface
     /**
      * Board evaluation.
      *
-     * @param array $b
+     * @param Board $b
      *
      * @return int
      */
-    protected function evaluateBoard(array $b): int
+    protected function evaluateBoard(Board $b): int
     {
-        for ($row = 0; $row < 3; $row++) {
-            if ($b[$row][0] === $b[$row][1] && $b[$row][1] === $b[$row][2]) {
-                if ($b[$row][0] === $this->player) {
-                    return 10;
-                } elseif ($b[$row][0] === $this->opponent) {
-                    return -10;
-                }
-            }
-        }
-
-        for ($col = 0; $col < 3; $col++) {
-            if ($b[0][$col] === $b[1][$col] && $b[1][$col] === $b[2][$col]) {
-                if ($b[0][$col] === $this->player) {
-                    return 10;
-                } elseif ($b[0][$col] === $this->opponent) {
-                    return -10;
-                }
-            }
-        }
-
-        if ($b[0][0] === $b[1][1] && $b[1][1] === $b[2][2]) {
-            if ($b[0][0] === $this->player) {
+        switch ($b->evaluate()) {
+            case $this->player:
                 return 10;
-            } elseif ($b[0][0] === $this->opponent) {
+            case $this->opponent:
                 return -10;
-            }
+            default:
+                return 0;
         }
-
-        if ($b[0][2] === $b[1][1] && $b[1][1] === $b[2][0]) {
-            if ($b[0][2] === $this->player) {
-                return 10;
-            } elseif ($b[0][2] === $this->opponent) {
-                return -10;
-            }
-        }
-
-        return 0;
     }
 
     /**

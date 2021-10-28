@@ -78,6 +78,50 @@ final class BoardTest extends TestCase
     }
 
     /**
+     * Test evaluate return winner X.
+     *
+     * @throws Exception
+     */
+    public function testBoardEvaluateWinnerX(): void
+    {
+        $board = Board::createByString('O_XXXOXO_');
+        $this->assertSame('X', $board->evaluate());
+    }
+
+    /**
+     * Test evaluate return winner O.
+     *
+     * @throws Exception
+     */
+    public function testBoardEvaluateWinnerO(): void
+    {
+        $board = Board::createByString('OX_XOX__O');
+        $this->assertSame('O', $board->evaluate());
+    }
+
+    /**
+     * Test evaluate return draw.
+     *
+     * @throws Exception
+     */
+    public function testBoardEvaluateDraw(): void
+    {
+        $board = Board::createByString('OXOXXOXOX');
+        $this->assertSame('_', $board->evaluate());
+    }
+
+    /**
+     * Test evaluate game is still on.
+     *
+     * @throws Exception
+     */
+    public function testBoardEvaluateGameIsOn(): void
+    {
+        $board = Board::createByString('_________');
+        $this->assertSame('_', $board->evaluate());
+    }
+
+    /**
      * Dummy array table.
      *
      * @return string[][]
