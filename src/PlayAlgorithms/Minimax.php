@@ -81,7 +81,7 @@ class Minimax implements PlayAlgorithmInterface
             return $score - $depth;
         } elseif ($score === -10) {
             return $score + $depth;
-        } elseif (!$this->isMovesLeft($board)) {
+        } elseif (!$board->hasEmptyCells()) {
             return 0;
         } elseif ($isMax) {
             $best = -1000;
@@ -132,17 +132,4 @@ class Minimax implements PlayAlgorithmInterface
                 return 0;
         }
     }
-
-    /**
-     * Check if moves can be made on a board.
-     *
-     * @param Board $board
-     *
-     * @return bool
-     */
-    protected function isMovesLeft(Board $board): bool
-    {
-        return $board->hasEmptyCells();
-    }
-
 }
