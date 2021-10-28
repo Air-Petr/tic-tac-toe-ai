@@ -46,7 +46,12 @@ final class BoardTest extends TestCase
         $this->assertSame($board->toString(), $copy->toString());
     }
 
-    public function testBoardTurn(): void
+    /**
+     * Test empty cells counter.
+     *
+     * @throws Exception
+     */
+    public function testEmptyCellsCount(): void
     {
         $board = Board::createByString('_________');
         $this->assertEquals(9, $board->countEmptyCells());
@@ -56,6 +61,20 @@ final class BoardTest extends TestCase
 
         $board = Board::createByString('__X__O__X');
         $this->assertEquals(6, $board->countEmptyCells());
+    }
+
+    /**
+     * Test board has empty cells.
+     *
+     * @throws Exception
+     */
+    public function testBoardHasEmptyCells(): void
+    {
+        $board = Board::createByString('__X__O__X');
+        $this->assertTrue($board->hasEmptyCells());
+
+        $board = Board::createByString('XOXOXOXOX');
+        $this->assertFalse($board->hasEmptyCells());
     }
 
     /**

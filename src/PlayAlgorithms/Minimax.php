@@ -171,7 +171,7 @@ class Minimax implements PlayAlgorithmInterface
      */
     protected function isMovesLeft(Board $board): bool
     {
-        return $board->countEmptyCells() > 0;
+        return $board->hasEmptyCells();
     }
 
 }

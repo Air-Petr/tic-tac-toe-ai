@@ -61,7 +61,7 @@ class Player
      */
     public function placeMark(string $mark, Board $board): Board
     {
-        if (!$board->countEmptyCells()) {
+        if (!$board->hasEmptyCells()) {
             throw new Exception("Board have no empty cells");
         }
 

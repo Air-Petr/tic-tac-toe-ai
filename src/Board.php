@@ -162,4 +162,14 @@ class Board
             return $cell === '_';
         }));
     }
+
+    /**
+     * Shows whether board has empty cells.
+     *
+     * @return bool
+     */
+    public function hasEmptyCells(): bool
+    {
+        return $this->countEmptyCells() > 0;
+    }
 }
