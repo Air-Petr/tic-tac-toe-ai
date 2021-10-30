@@ -23,7 +23,7 @@ class Random implements PlayAlgorithmInterface
     {
         $plainArrayState = $board->toPlainArray();
         $keysOfEmptyCells = array_keys($plainArrayState, '_');
-        $plainArrayState[array_rand($keysOfEmptyCells)] = $mark;
+        $plainArrayState[$keysOfEmptyCells[array_rand($keysOfEmptyCells)]] = $mark;
 
         return Board::createByPlainArray($plainArrayState);
     }
