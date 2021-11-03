@@ -50,7 +50,7 @@ class Game
         $this->board = new Board();
 
         $this->player1 = [
-            'player' => Player::hard(),
+            'player' => Player::normal(),
             'mark' => 'X'
         ];
 
@@ -91,6 +91,20 @@ class Game
         $this->board = $this->whoIsNext['player']->placeMark($this->whoIsNext['mark'], $this->board);
         $this->changeSide();
         $this->turn++;
+    }
+
+    /**
+     * Play a game.
+     *
+     * @return string
+     */
+    public function play(): string
+    {
+        while (!$this->isOver()) {
+            $this->takeTurn();
+        }
+
+        return $this->board->evaluate();
     }
 
     /**

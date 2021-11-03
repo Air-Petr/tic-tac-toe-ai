@@ -2,13 +2,12 @@
 
 namespace AirPetr\TicTacToeAi;
 
+use AirPetr\TicTacToeAi\PlayAlgorithms\Random;
 use Exception;
 use AirPetr\TicTacToeAi\Enum\PlayerDifficulty;
 use AirPetr\TicTacToeAi\PlayAlgorithms\Minimax;
-use AirPetr\TicTacToeAi\PlayAlgorithms\Random;
+use AirPetr\TicTacToeAi\PlayAlgorithms\Human;
 use AirPetr\TicTacToeAi\PlayAlgorithms\PlayAlgorithmInterface;
-
-use function PHPUnit\Framework\throwException;
 
 /**
  * AI Tic-tac-toe player.
@@ -28,6 +27,16 @@ class Player
     public function __construct(int $difficulty = PlayerDifficulty::NORMAL)
     {
         $this->difficulty = $difficulty;
+    }
+
+    /**
+     * Return easy player.
+     *
+     * @return Player
+     */
+    public static function easy(): Player
+    {
+        return new self(PlayerDifficulty::EASY);
     }
 
     /**
@@ -79,10 +88,13 @@ class Player
      */
     protected function getAlgorithm(): PlayAlgorithmInterface
     {
-        if ($this->difficulty === PlayerDifficulty::HARD) {
-            return new Minimax();
+        switch ($this->difficulty) {
+            case PlayerDifficulty::HARD:
+                return new Minimax();
+            case PlayerDifficulty::NORMAL:
+                return new Human();
+            default:
+                return new Random();
         }
-
-        return new Random();
     }
 }

@@ -7,6 +7,7 @@ namespace AirPetr\TicTacToeAi\Enum;
  */
 class PlayerDifficulty
 {
-    const NORMAL = 0;
-    const HARD = 1;
+    const EASY = 0;
+    const NORMAL = 1;
+    const HARD = 2;
 }
