@@ -93,7 +93,7 @@ class Player
                 return new Minimax();
             case PlayerDifficulty::NORMAL:
                 return new Human();
-            default:
+            case PlayerDifficulty::EASY:
                 return new Random();
         }
     }

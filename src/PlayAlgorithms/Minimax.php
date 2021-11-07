@@ -5,7 +5,7 @@ namespace AirPetr\TicTacToeAi\PlayAlgorithms;
 use AirPetr\TicTacToeAi\Board;
 
 /**
- * Minimax play algorithm.
+ * Minimax algorithm.
  */
 class Minimax implements PlayAlgorithmInterface
 {

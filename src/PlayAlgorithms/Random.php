@@ -5,7 +5,7 @@ namespace AirPetr\TicTacToeAi\PlayAlgorithms;
 use AirPetr\TicTacToeAi\Board;
 
 /**
- * Random algorithms.
+ * Random algorithm.
  *
  * Place a mark randomly.
  */
