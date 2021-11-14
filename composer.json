@@ -1,6 +1,8 @@
 {
     "name": "air-petr/tic-tac-toe-ai",
     "description": "PHP AI for Tic-Tac-Toe playing.",
+    "keywords": ["AI", "game", "algorithms"],
+    "license": "MIT",
     "require": {
         "php": ">=7.4"
     },
