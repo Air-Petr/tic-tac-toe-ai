@@ -1,5 +1,9 @@
 {
     "name": "air-petr/tic-tac-toe-ai",
+    "description": "PHP AI for Tic-Tac-Toe playing.",
+    "require": {
+        "php": ">=7.4"
+    },
     "autoload": {
          "psr-4": {"AirPetr\\TicTacToeAi\\": "src/"}
     },
