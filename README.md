@@ -3,9 +3,14 @@
 PHP AI for a tic-tac-toe game.
 
 ## Installation
+
+```bash
+composer require air-petr/tic-tac-toe-ai
+```
+
 ## How To Use
 
-`Player` and `Board` are main classes of this package. You create a board, give it to a AI player and receive a board with his move. `placeMark` is a main function for player.
+`Player` and `Board` are main classes of this package. In general, you create a board, give it to an AI player and receive it back with a new mark. `placeMark` is a main function of `Player` instance.
 
 ```php
 use AirPetr\TicTacToeAi\Player;
@@ -24,7 +29,7 @@ echo $boardWithMove->toString(); // "__X______"
 There are three difficulties of AI players: easy, normal and hard.
 - Easy player does random moves. 
 - Hard player is based on a minimax algorithm. He is unbeatable.
-- Normal player is a combination of both. He doesn't give you an easy victory, but can be caught by fork. Just like an average human Tic-tac-toe player.
+- Normal player is between hard and easy player. He doesn't give you an easy victory, but can be caught by fork. Just like an average human Tic-tac-toe player.
 
 ```php
 $easyPlayer = Player::easy();
@@ -32,7 +37,7 @@ $normalPlayer = Player::normal();
 $hardPlayer = Player::hard();
 ```
 
-Board can be created from various data sources. Use `X` and `O` symbols for board initialization:
+`Board` instance can be created from various data sources. Use `X` and `O` symbols for initialization:
 
 ```php
 $board1 = Board::createByString('__X___O__');
@@ -49,7 +54,7 @@ $board3 = Board::createByArrayTable([
 echo $board3->toString(); // "__X___O__"
 ```
 
-Board also can be converted to various representations:
+`Board` instance also can be converted to various representations:
 
 ```php
 $board = Board::createByString('__X___O__');
