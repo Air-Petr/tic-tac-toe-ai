@@ -2,12 +2,9 @@
 
 namespace AirPetr\TicTacToeAi;
 
-use AirPetr\TicTacToeAi\PlayAlgorithms\Random;
+use AirPetr\TicTacToeAi\MoveMakers\MoveMakerFactory;
 use Exception;
 use AirPetr\TicTacToeAi\Enum\PlayerDifficulty;
-use AirPetr\TicTacToeAi\PlayAlgorithms\Minimax;
-use AirPetr\TicTacToeAi\PlayAlgorithms\Human;
-use AirPetr\TicTacToeAi\PlayAlgorithms\PlayAlgorithmInterface;
 
 /**
  * AI Tic-tac-toe player.
@@ -78,23 +75,6 @@ class Player
             throw new Exception("Player can't put '$mark' now");
         }
 
-        return $this->getAlgorithm()->getBoardWithNewMark($mark, $board);
-    }
-
-    /**
-     * Return play algorithm.
-     *
-     * @return PlayAlgorithmInterface
-     */
-    protected function getAlgorithm(): PlayAlgorithmInterface
-    {
-        switch ($this->difficulty) {
-            case PlayerDifficulty::HARD:
-                return new Minimax();
-            case PlayerDifficulty::NORMAL:
-                return new Human();
-            case PlayerDifficulty::EASY:
-                return new Random();
-        }
+        return MoveMakerFactory::create($this->difficulty)->makeMove($mark, $board);
     }
 }

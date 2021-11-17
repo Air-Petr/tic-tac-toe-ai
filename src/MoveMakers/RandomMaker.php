@@ -1,25 +1,20 @@
 <?php
 
-namespace AirPetr\TicTacToeAi\PlayAlgorithms;
+namespace AirPetr\TicTacToeAi\MoveMakers;
 
 use AirPetr\TicTacToeAi\Board;
 
 /**
- * Random algorithm.
+ * Random maker.
  *
  * Place a mark randomly.
  */
-class Random implements PlayAlgorithmInterface
+class RandomMaker implements MoveMakerInterface
 {
     /**
-     * Return a board with a new mark (make a move).
-     *
-     * @param string $mark
-     * @param Board $board
-     *
-     * @return Board
+     * @inheritDoc
      */
-    public function getBoardWithNewMark(string $mark, Board $board): Board
+    public function makeMove(string $mark, Board $board): Board
     {
         $plainArrayState = $board->toPlainArray();
         $keysOfEmptyCells = array_keys($plainArrayState, '_');

@@ -1,13 +1,13 @@
 <?php
 
-namespace AirPetr\TicTacToeAi\PlayAlgorithms;
+namespace AirPetr\TicTacToeAi\MoveMakers;
 
 use AirPetr\TicTacToeAi\Board;
 
 /**
- * Minimax algorithm.
+ * Minimax maker.
  */
-class Minimax implements PlayAlgorithmInterface
+class MinimaxMaker implements MoveMakerInterface
 {
     /**
      * Player's side.
@@ -24,14 +24,9 @@ class Minimax implements PlayAlgorithmInterface
     protected $opponent;
 
     /**
-     * Return a board with a new mark (make a move).
-     *
-     * @param string $mark
-     * @param Board $board
-     *
-     * @return Board
+     * @inheritDoc
      */
-    public function getBoardWithNewMark(string $mark, Board $board): Board
+    public function makeMove(string $mark, Board $board): Board
     {
         $this->player = $mark;
         $this->opponent = ($mark === 'X') ? 'O' : 'X';

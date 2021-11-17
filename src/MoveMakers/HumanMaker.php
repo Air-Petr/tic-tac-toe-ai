@@ -1,15 +1,15 @@
 <?php
 
-namespace AirPetr\TicTacToeAi\PlayAlgorithms;
+namespace AirPetr\TicTacToeAi\MoveMakers;
 
 use AirPetr\TicTacToeAi\Board;
 
 /**
- * Human algorithm.
+ * Human move maker.
  *
- * Acts randomly but uses minimax before win or lose.
+ * Acts randomly but uses minimax in critical situations.
  */
-class Human implements PlayAlgorithmInterface
+class HumanMaker implements MoveMakerInterface
 {
     /**
      * @var Board
@@ -17,22 +17,17 @@ class Human implements PlayAlgorithmInterface
     protected $board;
 
     /**
-     * Return a board with a new mark (make a move).
-     *
-     * @param string $mark
-     * @param Board $board
-     *
-     * @return Board
+     * @inheritDoc
      */
-    public function getBoardWithNewMark(string $mark, Board $board): Board
+    public function makeMove(string $mark, Board $board): Board
     {
         $this->board = $board;
 
-        $algorithm = $this->nextTurnCanBeLast()
-            ? new Minimax()
-            : new Random();
+        $maker = $this->nextTurnCanBeLast()
+            ? new MinimaxMaker()
+            : new RandomMaker();
 
-        return $algorithm->getBoardWithNewMark($mark, $board);
+        return $maker->makeMove($mark, $board);
     }
 
     /**
