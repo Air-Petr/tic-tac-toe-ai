@@ -13,7 +13,7 @@ interface MinimaxServer
      * @param MinimaxNode $node
      * @param bool $isMaximizing
      *
-     * @return mixed
+     * @return int
      */
-    public function minimax(MinimaxNode $node, bool $isMaximizing);
+    public function minimax(MinimaxNode $node, bool $isMaximizing): int;
 }
