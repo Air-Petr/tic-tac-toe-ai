@@ -26,16 +26,14 @@ class Minimax implements MinimaxServer
             foreach ($node->playerChildNodes()() as $childNode) {
                 $best = max($best, $this->minimax($childNode, !$isMaximizing));
             }
-
-            return $best;
         } else {
             $best = 1000;
 
             foreach ($node->opponentChildNodes()() as $childNode) {
                 $best = min($best, $this->minimax($childNode, !$isMaximizing));
             }
-
-            return $best;
         }
+
+        return $best;
     }
 }

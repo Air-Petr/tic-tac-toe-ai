@@ -8,13 +8,6 @@ use AirPetr\TicTacToeAi\Minimax\MinimaxNode;
 class BoardNode implements MinimaxNode
 {
     /**
-     * Board array table representation.
-     *
-     * @var array|array[]|\string[][]
-     */
-    protected array $boardTable;
-
-    /**
      * Node depth.
      *
      * @var int
@@ -125,15 +118,14 @@ class BoardNode implements MinimaxNode
      */
     protected function getNodeGenerator(string $mark): callable
     {
-        $boardTable = $this->board->toArrayTable();
-        $depth = $this->depth + 1;
+        return function () use ($mark) {
+            $boardTable = $this->board->toArrayTable();
 
-        return function () use ($mark, $boardTable, $depth) {
             for ($i = 0; $i < 3; $i++) {
                 for ($j = 0; $j < 3; $j++) {
                     if ($boardTable[$i][$j] === '_') {
                         $boardTable[$i][$j] = $mark;
-                        $node = new self(Board::createByArrayTable($boardTable), $mark, $depth);
+                        $node = new self(Board::createByArrayTable($boardTable), $this->player, $this->depth + 1);
                         $boardTable[$i][$j] = '_';
                         yield $node;
                     }

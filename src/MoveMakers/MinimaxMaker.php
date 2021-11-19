@@ -24,7 +24,11 @@ class MinimaxMaker implements MoveMakerInterface
             for($j = 0; $j < 3; $j++) {
                 if ($boardTable[$i][$j] === '_') {
                     $boardTable[$i][$j] = $mark;
-                    $moveValue = (new Minimax())->minimax(new BoardNode(Board::createByArrayTable($boardTable), $mark), false);
+
+                    $minimaxServer = new Minimax();
+                    $minimaxNode = new BoardNode(Board::createByArrayTable($boardTable), $mark);
+                    $moveValue = $minimaxServer->minimax($minimaxNode, false);
+
                     $boardTable[$i][$j] = '_';
 
                     if ($moveValue > $bestValue) {
