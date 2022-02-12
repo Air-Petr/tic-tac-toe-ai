@@ -10,21 +10,36 @@ $aiPlayerSide = ($userSide === 'X') ? 'O' : 'X';
 
 $player1Move = ($userSide === 'X') ? 'askUserMove' : 'makeAIMove';
 $player2Move = ($player1Move === 'makeAIMove') ? 'askUserMove' : 'makeAIMove';
+$boardIsPrinted = false;
 
 while (!gameIsOver($board)) {
     $board = $player1Move($board);
 
     if (gameIsOver($board)) {
+        if ($userSide  === 'O') {
+            $consoleCleaner->clean(4);
+            printBoard($board);
+        }
         break;
     }
 
     if ($userSide  === 'X') {
+        if ($boardIsPrinted) {
+            $consoleCleaner->clean(4);
+        }
         $board = $player2Move($board);
+
         printBoard($board);
     } else {
+        if ($boardIsPrinted) {
+            $consoleCleaner->clean(4);
+        }
+
         printBoard($board);
         $board = $player2Move($board);
     }
+
+    $boardIsPrinted = true;
 }
 
 printGameResult($board);
