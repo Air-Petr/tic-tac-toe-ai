@@ -3,6 +3,7 @@
 require __DIR__ . '/../vendor/autoload.php';
 
 $board = new \AirPetr\TicTacToeAi\Board();
+$consoleCleaner = new \AirPetr\ConsoleCleaner();
 
 $userSide = askUserSide();
 $aiPlayerSide = ($userSide === 'X') ? 'O' : 'X';
@@ -48,17 +49,28 @@ function gameIsOver($board) {
 }
 
 function askUserMove($board) {
-    global $userSide;
+    global $userSide, $consoleCleaner;
 
     while (true) {
-        $userMove = explode(' ', readline("Your move: "));
+        $userMove = explode(' ', readline("Your move (row col, zero-based): "));
 
-        if (in_array($userSide, ['X', 'O'])) {
-            $board->put($userSide, $userMove[0], $userMove[1]);
-            return $board;
+        if (count($userMove) === 2) {
+            $row = $userMove[0];
+            $col = $userMove[1];
+            $validVariants = ['0', '1', '2'];
+
+            if (
+                in_array($row, $validVariants)
+                && in_array($col, $validVariants)
+                && !in_array($board->toArrayTable()[$row][$col], ['X', 'O'])
+            ) {
+                $board->put($userSide, (int) $userMove[0], (int) $userMove[1]);
+                return $board;
+            }
         }
 
-        echo "Wrong position\n";
+        $consoleCleaner->clean(1);
+        echo "Wrong position! ";
     }
 }
 
