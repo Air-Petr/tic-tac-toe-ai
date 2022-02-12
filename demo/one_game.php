@@ -2,22 +2,8 @@
 
 require __DIR__ . '/../vendor/autoload.php';
 
-use AirPetr\TicTacToeAi\Classes\Game;
-use AirPetr\ConsoleCleaner;
-
-function printGameResult($board) {
-    if ($board->evaluate() === '_') {
-        echo "It's draw!";
-    } else {
-        echo $board->evaluate() . " is winner!";
-    }
-
-    echo "\n";
-}
-
-
-$game = new Game();
-$consoleCleaner = new ConsoleCleaner();
+$game = new \AirPetr\TicTacToeAi\Classes\Game();
+$consoleCleaner = new \AirPetr\ConsoleCleaner();
 
 while (true) {
     $game->takeTurn();
@@ -41,6 +27,16 @@ while (true) {
         break;
     }
 }
+
+function printGameResult ($board) {
+    if ($board->evaluate() === '_') {
+        echo "It's draw!";
+    } else {
+        echo $board->evaluate() . " is winner!";
+    }
+
+    echo "\n";
+};
 
 printGameResult($game->getBoard());
 
