@@ -77,7 +77,7 @@ You can play with code in `demo` folder. Here's how you can run interactive game
 php demo/interactive_game.php
 ```
 
-## Testting
+## Testing
 
 There are some unit tests in `test` folder. Run tests by:
 
