@@ -2,8 +2,11 @@
 
 require __DIR__ . '/../vendor/autoload.php';
 
-$board = new \AirPetr\TicTacToeAi\Board();
-$consoleCleaner = new \AirPetr\ConsoleCleaner();
+use AirPetr\TicTacToeAi\Board;
+use AirPetr\ConsoleCleaner;
+
+$board = new Board();
+$consoleCleaner = new ConsoleCleaner();
 
 $userSide = askUserSide();
 $aiPlayerSide = ($userSide === 'X') ? 'O' : 'X';
@@ -17,24 +20,20 @@ while (!gameIsOver($board)) {
 
     if (gameIsOver($board)) {
         if ($userSide  === 'O') {
-            $consoleCleaner->clean(4);
+            cleanConsoleBoard();
             printBoard($board);
         }
         break;
     }
 
-    if ($userSide  === 'X') {
-        if ($boardIsPrinted) {
-            $consoleCleaner->clean(4);
-        }
-        $board = $player2Move($board);
+    if ($boardIsPrinted) {
+        cleanConsoleBoard();
+    }
 
+    if ($userSide  === 'X') {
+        $board = $player2Move($board);
         printBoard($board);
     } else {
-        if ($boardIsPrinted) {
-            $consoleCleaner->clean(4);
-        }
-
         printBoard($board);
         $board = $player2Move($board);
     }
@@ -43,11 +42,13 @@ while (!gameIsOver($board)) {
 }
 
 printGameResult($board);
-die();
 
 // End of the script.
 
-function askUserSide() {
+/**
+ * @return void
+ */
+function askUserSide(): string {
     while (true) {
         $userSide = readline("Choose your side (X/O): ");
 
@@ -59,11 +60,19 @@ function askUserSide() {
     }
 }
 
-function gameIsOver($board) {
+/**
+ * @param Board $board
+ * @return bool
+ */
+function gameIsOver(Board $board): bool {
     return in_array($board->evaluate(), ['X', 'O']) || !$board->hasEmptyCells();
 }
 
-function askUserMove($board) {
+/**
+ * @param Board $board
+ * @return Board
+ */
+function askUserMove(Board $board): Board {
     global $userSide, $consoleCleaner;
 
     while (true) {
@@ -89,14 +98,11 @@ function askUserMove($board) {
     }
 }
 
-function makeAIMove($board) {
-    global $aiPlayerSide;
-
-    $aiPlayer = \AirPetr\TicTacToeAi\Player::normal();
-    return $aiPlayer->placeMark($aiPlayerSide, $board);
-}
-
-function printBoard($board) {
+/**
+ * @param Board $board
+ * @return void
+ */
+function printBoard(Board $board): void {
     foreach ($board->toArrayTable() as $row) {
         echo "    ";
 
@@ -108,7 +114,23 @@ function printBoard($board) {
     }
 }
 
-function printGameResult($board) {
+/**
+ * @param Board $board
+ * @return Board
+ * @throws Exception
+ */
+function makeAIMove(Board $board): Board {
+    global $aiPlayerSide;
+
+    $aiPlayer = \AirPetr\TicTacToeAi\Player::normal();
+    return $aiPlayer->placeMark($aiPlayerSide, $board);
+}
+
+/**
+ * @param Board $board
+ * @return void
+ */
+function printGameResult(Board $board): void {
     echo "Game is over\n";
 
     if ($board->evaluate() === '_') {
@@ -118,4 +140,12 @@ function printGameResult($board) {
     }
 
     echo "\n";
+}
+
+/**
+ * @return void
+ */
+function cleanConsoleBoard(): void {
+    global $consoleCleaner;
+    $consoleCleaner->clean(4);
 }
